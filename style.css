@@ -124,7 +124,8 @@ label {
 input[type="email"],
 input[type="password"],
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+input[type="file"] {
     width: 100%;
     padding: 12px;
     border: 2px solid #ddd;
@@ -137,7 +138,8 @@ input[type="number"] {
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="text"]:focus,
-input[type="number"]:focus {
+input[type="number"]:focus,
+input[type="file"]:focus {
     border-color: #667eea;
     box-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
 }
@@ -268,6 +270,27 @@ input[type="number"]:focus {
     color: #667eea;
 }
 
+.navbar-menu {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.admin-btn {
+    background: #2196F3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.admin-btn:hover {
+    background: #1976D2;
+}
+
 .logout-btn {
     background: #d32f2f;
     color: white;
@@ -350,6 +373,27 @@ input[type="number"]:focus {
     transform: translateY(-2px);
 }
 
+/* Upload Progress */
+.progress {
+    width: 100%;
+    height: 8px;
+    background: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress.hidden {
+    display: none;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
 /* Results */
 .results {
     margin-top: 15px;
@@ -387,6 +431,7 @@ input[type="number"]:focus {
     border-radius: 8px;
     padding: 15px;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .room-card:hover {
@@ -411,11 +456,219 @@ input[type="number"]:focus {
     margin-top: 10px;
 }
 
+.room-media-thumb {
+    width: 100%;
+    height: 150px;
+    background: #e0e0e0;
+    border-radius: 6px;
+    margin: 10px 0;
+    object-fit: cover;
+    cursor: pointer;
+}
+
 .empty-message {
     text-align: center;
     color: #999;
     padding: 30px;
     font-style: italic;
+}
+
+/* ============ ADMIN MODAL ============ */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.hidden {
+    display: none !important;
+}
+
+.modal {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+}
+
+.modal-content.media-modal {
+    max-width: 600px;
+    padding: 20px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+}
+
+.modal-header h2 {
+    color: #333;
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+/* Admin Tabs */
+.admin-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.admin-tab-btn {
+    padding: 12px 20px;
+    border: none;
+    background: none;
+    color: #999;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+}
+
+.admin-tab-btn.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+}
+
+.admin-tab-btn:hover {
+    color: #667eea;
+}
+
+/* Admin Tab Content */
+.admin-tab-content {
+    display: none;
+}
+
+.admin-tab-content.active {
+    display: block;
+}
+
+.admin-card {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+}
+
+.admin-card h4 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+/* Tables */
+.users-table,
+.rooms-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.users-table thead,
+.rooms-table thead {
+    background: #f5f5f5;
+}
+
+.users-table th,
+.rooms-table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #555;
+    border-bottom: 2px solid #ddd;
+}
+
+.users-table td,
+.rooms-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.users-table tbody tr:hover,
+.rooms-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.delete-btn {
+    background: #d32f2f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #b71c1c;
+}
+
+.view-btn {
+    background: #2196F3;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.view-btn:hover {
+    background: #1976D2;
+}
+
+/* Media Content */
+#mediaContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mediaContent img,
+#mediaContent video {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 8px;
 }
 
 /* Responsive */
@@ -434,6 +687,11 @@ input[type="number"]:focus {
         gap: 10px;
     }
 
+    .navbar-menu {
+        width: 100%;
+        justify-content: space-between;
+    }
+
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
@@ -444,6 +702,23 @@ input[type="number"]:focus {
 
     .rooms-list {
         grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .users-table,
+    .rooms-table {
+        font-size: 12px;
+    }
+
+    .users-table th,
+    .users-table td,
+    .rooms-table th,
+    .rooms-table td {
+        padding: 8px;
     }
 }
 
@@ -462,5 +737,18 @@ input[type="number"]:focus {
 
     input, .btn-submit, .btn-primary {
         font-size: 13px;
+    }
+
+    .modal-content {
+        width: 98%;
+    }
+
+    .admin-tabs {
+        flex-wrap: wrap;
+    }
+
+    .admin-tab-btn {
+        padding: 10px 15px;
+        font-size: 14px;
     }
 }
