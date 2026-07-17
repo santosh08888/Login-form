@@ -116,7 +116,10 @@
     <div id="dashboard" class="dashboard hidden">
         <nav class="navbar">
             <div class="navbar-brand">🏠 Room Khoj</div>
-            <button id="logoutBtn" class="logout-btn">Logout</button>
+            <div class="navbar-menu">
+                <button id="adminPanelBtn" class="admin-btn">👨‍💼 Admin Panel</button>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
         </nav>
 
         <div class="dashboard-content">
@@ -154,7 +157,17 @@
                             placeholder="Budget (e.g., 15000)"
                             class="search-input"
                         >
+                        <label>Upload Photo/Video:</label>
+                        <input 
+                            type="file" 
+                            id="roomMedia" 
+                            accept="image/*,video/*"
+                            class="search-input"
+                        >
                         <button id="createBtn" class="btn-primary">Create</button>
+                    </div>
+                    <div id="uploadProgress" class="progress hidden">
+                        <div class="progress-bar"></div>
                     </div>
                 </div>
             </div>
@@ -170,6 +183,87 @@
                 <h3>🏘️ All Available Rooms</h3>
                 <div id="allRooms" class="rooms-list"></div>
             </div>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL MODAL -->
+    <div id="adminModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>👨‍💼 Admin Panel</h2>
+                <button id="closeAdminBtn" class="close-btn">&times;</button>
+            </div>
+
+            <!-- Admin Tabs -->
+            <div class="admin-tabs">
+                <button class="admin-tab-btn active" data-admin-tab="users">👥 Users</button>
+                <button class="admin-tab-btn" data-admin-tab="rooms">📍 Rooms</button>
+            </div>
+
+            <!-- Users Management -->
+            <div id="usersTab" class="admin-tab-content active">
+                <h3>User Management</h3>
+                
+                <!-- Create User -->
+                <div class="admin-card">
+                    <h4>Create New User</h4>
+                    <div class="form-group">
+                        <input type="text" id="newUserName" placeholder="Full Name" class="search-input">
+                        <input type="email" id="newUserEmail" placeholder="Email" class="search-input">
+                        <input type="password" id="newUserPassword" placeholder="Password" class="search-input">
+                        <button id="createUserBtn" class="btn-primary">Create User</button>
+                    </div>
+                </div>
+
+                <!-- Users List -->
+                <div class="admin-card">
+                    <h4>All Users</h4>
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Created</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Rooms Management -->
+            <div id="roomsTab" class="admin-tab-content">
+                <h3>Room Management</h3>
+                
+                <div class="admin-card">
+                    <h4>All Rooms</h4>
+                    <table class="rooms-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Budget</th>
+                                <th>Created By</th>
+                                <th>Media</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="roomsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for viewing room media -->
+    <div id="mediaModal" class="modal hidden">
+        <div class="modal-content media-modal">
+            <button id="closeMediaBtn" class="close-btn">&times;</button>
+            <div id="mediaContent"></div>
         </div>
     </div>
 
